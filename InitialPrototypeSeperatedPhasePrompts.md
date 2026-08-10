@@ -344,3 +344,97 @@ Fix compilation or test errors caused by this phase.
 Summarize implementation and validation.
 
 
+
+
+
+# Cline Task — Phase 5: Local Storage Service
+
+Implement only Phase 5.
+
+## Objective
+
+Implement local JSON persistence.
+
+Implement:
+
+```text
+lib/services/storage_service.dart
+```
+
+## Required Behavior
+
+The storage service shall:
+
+1. Locate the application's appropriate local storage directory.
+2. Use the configured persistence filename.
+3. Create the file if it does not exist.
+4. Read JSON data.
+5. Write JSON data.
+6. Reset/delete stored data when requested.
+7. Recover safely from missing or corrupted data.
+
+Use Flutter-compatible local filesystem APIs and `path_provider`.
+
+## Data
+
+The primary file is:
+
+```text
+mindful_data.json
+```
+
+The service should work with `MindfulData`.
+
+## Error Handling
+
+Handle:
+
+* missing file.
+* empty file.
+* invalid JSON.
+* malformed data.
+* read failures.
+* write failures.
+
+Do not crash the application because persisted data is unavailable or corrupted.
+
+## Constraints
+
+Do not implement:
+
+* DashboardProvider.
+* navigation monitoring.
+* timers.
+* UI.
+* scroll detection.
+
+## Testing
+
+Add tests for:
+
+* first launch/missing file.
+* valid existing data.
+* corrupted JSON.
+* empty file.
+* reset.
+* write/read round trip.
+
+Use dependency injection or another testable design so tests do not require uncontrolled real filesystem state.
+
+Run:
+
+```bash
+flutter analyze
+flutter test
+```
+
+Fix all issues caused by this phase.
+
+## Final Response
+
+Report implementation, dependencies changed, tests, and validation.
+
+
+
+
+
