@@ -95,5 +95,252 @@ Report:
 
 
 
+# Cline Task — Phase 2: Application Configuration
+
+Implement only Phase 2 of the Mindful application.
+
+## Objective
+
+Create a centralized configuration system for application behavioral thresholds and default values.
+
+## Requirements
+
+Implement:
+
+```text
+lib/core/app_constants.dart
+```
+
+Define centralized constants for:
+
+* Navigation interruption threshold.
+* Navigation detection window.
+* Continuous scrolling threshold.
+* Maximum allowed scroll pause.
+* Intervention overlay duration.
+* Default current streak.
+* Default longest streak.
+* Default save count.
+* Persistent data file name.
+
+Use the following initial behavioral values:
+
+```text
+Navigation switches: 3
+Navigation window: 10 seconds
+
+Continuous scrolling: 3 minutes
+Maximum continuous-scroll pause: 15 seconds
+
+Intervention duration: 15 seconds
+
+Default saves: 0
+Default current streak: 0
+Default longest streak: 0
+
+Persistence file: mindful_data.json
+```
+
+Use appropriate Dart types and `Duration` values where appropriate.
+
+## Constraints
+
+* Do not implement navigation detection.
+* Do not implement scrolling detection.
+* Do not implement persistence.
+* Do not implement UI.
+* Do not create magic-number replacements outside this phase.
+* Do not modify unrelated files unless required for compilation.
+
+All future behavioral code must be able to reference these constants instead of hard-coded thresholds.
+
+## Validation
+
+Run:
+
+```bash
+flutter analyze
+flutter test
+```
+
+If tests do not exist, state that clearly.
+
+Fix only issues related to this phase.
+
+## Final Response
+
+Report:
+
+* Constants added.
+* Files changed.
+* Analysis result.
+* Test result.
+
+
+
+
+# Cline Task — Phase 3: User Activity and Application Data Models
+
+Implement only Phase 3.
+
+## Objective
+
+Create the core data models required by the application.
+
+## UserActivity
+
+Implement:
+
+```text
+lib/core/models/user_activity_model.dart
+```
+
+Represent a user activity event with:
+
+* timestamp
+* event type
+* metadata
+
+The model must support:
+
+* default construction
+* JSON serialization
+* JSON deserialization
+* copyWith()
+
+Metadata should support arbitrary JSON-compatible values.
+
+## MindfulData
+
+Implement:
+
+```text
+lib/models/data_schema_model.dart
+```
+
+Represent persisted mindfulness statistics:
+
+* savesCount
+* focusStreaks
+* lastCheckTime
+
+Also support:
+
+* sensible default constructor
+* JSON serialization
+* JSON deserialization
+* copyWith()
+
+Use nullable handling where appropriate for timestamps.
+
+## Requirements
+
+The models must:
+
+* be independent of UI.
+* contain no persistence logic.
+* contain no provider logic.
+* contain no navigation logic.
+* contain no timer logic.
+
+JSON output should be deterministic and safe to persist locally.
+
+Handle missing optional JSON fields gracefully.
+
+## Validation
+
+Run:
+
+```bash
+flutter analyze
+flutter test
+```
+
+Add focused unit tests for:
+
+* default values.
+* JSON round trip.
+* copyWith().
+* missing optional fields.
+
+Do not implement future application features.
+
+## Final Response
+
+Report files changed, model behavior, tests added, and validation results.
+
+
+
+
+
+# Cline Task — Phase 4: Base Provider
+
+Implement only Phase 4.
+
+## Objective
+
+Create the shared provider/state-management foundation.
+
+Implement:
+
+```text
+lib/core/providers/base_provider.dart
+```
+
+The base provider shall:
+
+* extend ChangeNotifier.
+* expose loading state.
+* expose initialized state.
+* provide safe state notification behavior.
+* allow subclasses to update state cleanly.
+
+## Requirements
+
+The provider must support a lifecycle similar to:
+
+```text
+not initialized
+      ↓
+loading
+      ↓
+initialized
+```
+
+Provide safe notification behavior so that state changes do not attempt invalid notifications after disposal.
+
+Keep the implementation generic enough for:
+
+* DashboardProvider.
+* InterruptProvider.
+* Future providers.
+
+## Constraints
+
+Do not implement:
+
+* dashboard state.
+* interrupt state.
+* storage.
+* navigation.
+* timers.
+* UI.
+
+## Validation
+
+Run:
+
+```bash
+flutter analyze
+flutter test
+```
+
+Add focused tests if practical.
+
+Fix compilation or test errors caused by this phase.
+
+## Final Response
+
+Summarize implementation and validation.
 
 
